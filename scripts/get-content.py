@@ -32,7 +32,7 @@ response = requests.get(url, headers=headers)
 if response.status_code == 200:
     # Convert the response to JSON format
     data = response.json()
-    logging.info(f"Read {len(data['items']} repos in {org} with topic {topic}")
+    logging.info(f"Read {len(data['items'])} repos in {org} with topic {topic}")
 
     # Extract the relevant information from the response
     table_data = []
