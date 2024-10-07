@@ -1,3 +1,4 @@
+import logging
 import os
 import requests
 from environs import Env
@@ -5,6 +6,11 @@ from tabulate import tabulate
 
 env = Env()
 env.read_env()  # Read the .env file
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s | %(levelname)s | %(funcName)s | %(message)s",
+    datefmt="%Y-%m-%d %H:%M:%S",
+)
 
 org = 'moj-analytical-services'
 topic = 'dmet-python-packages'
@@ -26,6 +32,7 @@ response = requests.get(url, headers=headers)
 if response.status_code == 200:
     # Convert the response to JSON format
     data = response.json()
+    logging.info(f"Read {len(data['items']} repos in {org} with topic {topic}")
 
     # Extract the relevant information from the response
     table_data = []
